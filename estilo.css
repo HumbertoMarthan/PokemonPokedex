@@ -1,3 +1,10 @@
+.autocomplete-items{
+  background-color: white;
+}
+.row{
+  margin-left: 0 !important;
+}
+
 .espacoCima{
     padding-top: 25px !important;
 }
@@ -11,7 +18,7 @@
 }
         
 .search {
-  display: flex;
+  /* display: flex; */
 }
 
 .search .search-input,
@@ -20,16 +27,11 @@
   padding: 1em;
 }
 
-.search .search-input {
-  width: 100%;
-  border-radius: 25px !important;
-}
-
 .search .search-button {
-  background-color: #2b75bb;
-  color: #fff;
+  /* background-color: #2b75bb; */
+  /* color: #fff; */
   cursor: pointer;
-  border-radius: 25px !important;   
+  /* border-radius: 25px !important;    */
 }
 
 
