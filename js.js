@@ -20,12 +20,25 @@ async function requestPokeInfo(url, name) {
       pokemon = data;
       //Mostra container
       $(".container").addClass("aparece");
+      var tamanho = "";
+      tamanho = pokemon.id.toString();
+      console.log('tamanho: '  + tamanho.length);
+      if(tamanho.length <= 2){
+        if(tamanho.length == 2){
+            pokemon.id = '0'+ tamanho;
+        }  
+        if(tamanho.length == 1){
+            pokemon.id = '00'+ tamanho;
+        }
+      }
       
     })
     .catch(err => console.log(err));
 }
 
 function createCard () {
+   
+
   card = `
              <div class="card" style="width: 100%;border-radius: 25px !important;background-color:#2a92b1">
                 <div class="row">
@@ -35,6 +48,7 @@ function createCard () {
                 </div>
 
                 <div class="row">
+                
                     <div class="col-md-12" style="text-align:center" >
                         <img class="rounded-circle" src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png" </img>
                     </div>
