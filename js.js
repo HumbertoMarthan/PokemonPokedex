@@ -51,7 +51,7 @@ function createCard () {
                 <div class="row">
                 
                     <div class="col-md-12" style="text-align:center" >
-                        <img class="rounded-circle" src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png" </img>
+                        <img class="rounded-circle" src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png" height="100%" width="100%"> </img>
                     </div>
                 </div>    
             
