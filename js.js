@@ -204,7 +204,7 @@ async function requisicao(url) {
     })
     .catch(err => console.log(err));
 }
- requisicao('https://pokeapi.co/api/v2/pokemon/');
+ requisicao('https://pokeapi.co/api/v2/pokemon/?limit=2000');
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), pokeList);
