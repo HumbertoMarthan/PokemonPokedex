@@ -23,7 +23,7 @@ async function requestPokeInfo(url, name) {
       
       var tamanho = "";
       tamanho = pokemon.id.toString();
-      console.log('tamanho: '  + tamanho.length);
+      //console.log('tamanho: '  + tamanho.length);
       if(tamanho.length <= 2){
         if(tamanho.length == 2){
             pokemon.id = '0'+ tamanho;
@@ -198,9 +198,9 @@ async function requisicao(url) {
       
       data.results.forEach(e => {
         pokeList.push(e.name.toString());
-        console.log(e.name.toString());
+      //  console.log(e.name.toString());
       });
-      console.log(pokeList);
+      //console.log(pokeList);
     })
     .catch(err => console.log(err));
 }
