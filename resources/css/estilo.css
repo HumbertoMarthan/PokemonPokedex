@@ -1,3 +1,96 @@
+.normal{
+  background-color: #252523 !important;
+  border-color: #252523 !important 
+}
+
+.fighting{
+  background-color: darkred;border-color: darkred !important
+}
+
+.flying{
+  background-color: lightcoral !important;border-color: lightcoral !important
+}
+
+.poison{
+  background-color: #ac27b5 !important;border-color: #ac27b5 !important
+}
+
+
+.ground{
+  background-color: brown !important;border-color: brown !important
+}
+
+.rock{
+  background-color: sandybrown !important;border-color: sandybrown !important 
+}
+
+.bug{
+  background-color: darkgreen !important;border-color: darkgreen !important
+}
+
+.ghost{
+  background-color: gray !important;border-color: gray !important 
+}
+
+.steel{
+  background-color: silver !important;border-color: silver !important 
+}
+
+.fire{
+  background-color: red !important;border-color: red !important 
+}
+
+.water{
+  background-color: #c0cdfb !important;border-color: #c0cdfb !important
+}
+.grass{
+  background-color: green !important;border-color: green !important 
+}
+
+.electric{
+  background-color: yellowgreen !important;border-color: yellowgreen !important
+}
+
+.psychic{
+  background-color: #008aff !important;border-color: #008aff !important
+}
+
+.ice{
+  background-color: #4ccccb !important;border-color: #4ccccb !important
+}
+
+.dragon{
+  background-color: orange !important;border-color: orange !important
+}
+
+.dark{
+  background-color: #ad8235;border-color: #ad8235 !important 
+}
+
+.fairy{
+  background-color:lightblue;border-color: lightblue !important
+}
+
+
+
+
+.btn.disabled, .btn:disabled {
+   opacity: 1 !important;
+}
+
+.cardHeaderFooter{
+  background-color: #0062cc;
+  border-radius: 20px 20px 0 0;
+}
+.card{
+  border: 0  !important;
+}
+.name{
+  font-family: 'cream', sans-serif;
+  padding-bottom: 5px;
+  padding-top: 40px;
+  color: white;
+}
 .autocomplete-items{
   background-color: white;
 }
