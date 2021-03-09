@@ -1,3 +1,7 @@
+html, body, input, textarea, select, button {
+  background-color:#e8e1e1
+}
+
 .normal{
   background-color: #252523 !important;
   border-color: #252523 !important 
