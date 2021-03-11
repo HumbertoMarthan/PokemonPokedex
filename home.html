@@ -19,23 +19,45 @@
      $(".container").addClass("ddd");
     });
   </script>
-  
-  <div class="row" style="text-align: center;">
-    <div class="col-md-12" style="text-align: center;">
-      <img width="300" height="200px" src="https://cdn.freebiesupply.com/images/large/2x/pokemon-logo-transparent.png" alt="Pokemon Logo">
-    </div>
-    
+
+<nav class="row navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Pokedex Pokemon</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
   </div>
-  <div class="row justify-content-center">
-      <form action="" class="search autocomplete">
-          <input  autocomplete="off" style="border-radius: 10px 0 0 10px;" id="myInput" type="search" name="myCountry" class="search-input" placeholder="Procure seu pokemon">
+</nav>
+
+
+
+  <div class="row" style="text-align: center;padding-top: 30px">
+    <div class="col-md-12" style="text-align: center;">
+      <img     width="320px" height="100px" src="resources/images/poke.png" alt="Pokemon Logo"/>
+    </div>
+  </div>
+
+  <div class="row justify-content-center" style="padding-top: 30px">
+      <form autocomplete="off" action="" class="search autocomplete">
+          <input style="border-radius: 10px 0 0 10px;" id="myInput" type="search" name="myCountry" class="search-input" placeholder="Procure seu pokemon">
           <button style="border-radius: 0 10px 10px 0;" class="search-button btn-primary">Pesquisar</button>
       </form>
-    </div>
   </div>
   
   <div class="row" style="text-align: center;">
-    <div name="nome" class="col-12 col-md-4 container pokemon espacoCima"></div>
+    <div name="nome" class="col-md-8 container pokemon espacoCima"></div>
   </div> 
 
   <script src="resources/js/js.js"></script>

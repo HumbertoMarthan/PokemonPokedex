@@ -38,6 +38,7 @@ async function requestPokeInfo(url, name) {
     .catch(err => console.log(err));
 }
 
+
 function createCard () {
   
   var hp, 
@@ -50,32 +51,26 @@ function createCard () {
   pokemon.stats.forEach(e => {
     if(e.stat.name === 'hp'){
       hp = e.base_stat;
-      console.log('hp');
     }
 
     if(e.stat.name === 'attack'){
       attack = e.base_stat;
-      console.log('attack');
     }
 
     if(e.stat.name === 'defense'){
       defense = e.base_stat;
-      console.log('defense');
     }
    
     if(e.stat.name === 'special-attack'){
       specialattack = e.base_stat;
-      console.log('defense');
     }
 
     if(e.stat.name === 'special-defense'){
       specialdefense = e.base_stat;
-      console.log('defense');
     }
 
     if(e.stat.name === 'speed'){
       speed = e.base_stat;
-      console.log('speed');
     }
   });
 
@@ -203,17 +198,14 @@ if(pokemon.types.length >= 1){
   card = `
              <div class="card" style="width: 100%;border-radius: 25px !important;background-color:#e8e1e1">
                 <div class="row container cardHeaderFooter" >
-                    <div class="col-7" >
+                    <div class="col-12" >
                         <h3 class="name">${pokemon.name.toUpperCase()}</h3>
                     </div>
-                    <div class="col-3" style="padding-top: 40px;color:white !important">
-                        <p style=""> Nº ${pokemon.order}
-                    </div>
-                    <div class="col-2" style="padding-top: 30px;">
-                        <img class="rounded-cir cle" src="resources/images/pokebola.png" height="40px" width="40px"> </img>
-                    </div>
-                    <div class="col-12" style="padding: 20px" >
+                    <div class="col-8" style="padding: 15px" >
                       ` + botaoTipo + `  
+                    </div>
+                    <div class="col-2" style="padding-top: 10px ;padding-right: 35px;">
+                        <img class="rounded-cir cle" src="resources/images/pokebola.png" height="40px" width="40px"> </img>
                     </div>
 
                 </div>
@@ -228,18 +220,18 @@ if(pokemon.types.length >= 1){
                     <p class="card-text">
                         <div class="row container">
                             <div class="col-4">
-                              <h6>Peso ${pokemon.weight  / 10}kg</h6> 
-                              <h6>Altura ${pokemon.height  / 10}m</h6>
+                              <h7>${pokemon.weight  / 10}kg</h7> 
+                              <h7>Altura ${pokemon.height  / 10}m</h7>
                             </div>
-                            <div class="col-4">
-                             HP:  ${hp} <br/> 
-                             ATK: ${attack} <br/> 
-                             DEF: ${defense}
+                            <div class="col-4" style="border-left-style: inset;border-left-width: thin;">
+                            <h7>HP:  ${hp} </h7>
+                            <h7>ATK: ${attack} </h7>
+                            <h7>DEF: ${defense} </h7>
                             </div>  
-                            <div class="col-4">
-                             SPD: ${speed} <br/>
-                             SAT: ${specialattack} <br/> 
-                             SDF: ${specialdefense} 
+                            <div class="col-4" style="border-left-style: inset;border-left-width: thin;">
+                            <h7>SPD: ${speed} </h7> 
+                            <h7>SAT: ${specialattack} </h7>  
+                            <h7>SDF: ${specialdefense}  </h7>
                             </div>  
                             
                     </p>
@@ -263,89 +255,65 @@ searchButton.addEventListener('click', event => {
 });
 
 function autocomplete(inp, arr) {
-    /*the autocomplete function takes two arguments,
-    the text field element and an array of possible autocompleted values:*/
+    
     var currentFocus;
-    /*execute a function when someone writes in the text field:*/
     inp.addEventListener("input", function(e) {
         var a, b, i, val = this.value;
-        /*close any already open lists of autocompleted values*/
+        
         closeAllLists();
         if (!val) { return false;}
         currentFocus = -1;
-        /*create a DIV element that will contain the items (values):*/
+       
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "col-md-12 autocomplete-items");
-        /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
-        /*for each item in the array...*/
+       
         for (i = 0; i < arr.length; i++) {
-          /*check if the item starts with the same letters as the text field value:*/
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-            /*create a DIV element for each matching element:*/
             b = document.createElement("DIV");
-            /*make the matching letters bold:*/
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
-            /*insert a input field that will hold the current array item's value:*/
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-            /*execute a function when someone clicks on the item value (DIV element):*/
             b.addEventListener("click", function(e) {
-                /*insert the value for the autocomplete text field:*/
                 inp.value = this.getElementsByTagName("input")[0].value;
-                /*close the list of autocompleted values,
-                (or any other open lists of autocompleted values:*/
                 closeAllLists();
             });
             a.appendChild(b);
           }
         }
     });
+   
     /*execute a function presses a key on the keyboard:*/
     inp.addEventListener("keydown", function(e) {
         var x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
         if (e.keyCode == 40) {
-          /*If the arrow DOWN key is pressed,
-          increase the currentFocus variable:*/
           currentFocus++;
-          /*and and make the current item more visible:*/
           addActive(x);
         } else if (e.keyCode == 38) { //up
-          /*If the arrow UP key is pressed,
-          decrease the currentFocus variable:*/
           currentFocus--;
-          /*and and make the current item more visible:*/
           addActive(x);
         } else if (e.keyCode == 13) {
-          /*If the ENTER key is pressed, prevent the form from being submitted,*/
           e.preventDefault();
           if (currentFocus > -1) {
-            /*and simulate a click on the "active" item:*/
             if (x) x[currentFocus].click();
           }
         }
     });
     function addActive(x) {
-      /*a function to classify an item as "active":*/
       if (!x) return false;
-      /*start by removing the "active" class on all items:*/
       removeActive(x);
       if (currentFocus >= x.length) currentFocus = 0;
       if (currentFocus < 0) currentFocus = (x.length - 1);
-      /*add class "autocomplete-active":*/
       x[currentFocus].classList.add("autocomplete-active");
     }
     function removeActive(x) {
-      /*a function to remove the "active" class from all autocomplete items:*/
       for (var i = 0; i < x.length; i++) {
         x[i].classList.remove("autocomplete-active");
       }
     }
     function closeAllLists(elmnt) {
-      /*close all autocomplete lists in the document,
-      except the one passed as an argument:*/
       var x = document.getElementsByClassName("autocomplete-items");
       for (var i = 0; i < x.length; i++) {
         if (elmnt != x[i] && elmnt != inp) {
@@ -353,7 +321,7 @@ function autocomplete(inp, arr) {
         }
       }
     }
-    /*execute a function when someone clicks in the document:*/
+    
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
@@ -366,7 +334,10 @@ async function requisicao(url) {
     .then(data => {
       
       data.results.forEach(e => {
-        pokeList.push(e.name.toString());
+        //pokemons /10000
+        if(e.url.length != 40){
+          pokeList.push(e.name.toString());
+        }
       });
     })
     .catch(err => console.log(err));
