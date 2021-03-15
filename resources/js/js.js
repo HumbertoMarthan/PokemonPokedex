@@ -1,27 +1,38 @@
-// API endpoint --------------------------------------------
 const baseUrl = 'https://pokeapi.co/api/v2/pokemon/';
-
-// Get Elements --------------------------------------------
 const getElement = document.querySelector.bind(document);
 const searchInput = getElement('.search-input'),
       searchButton = getElement('.search-button'),
-      container = getElement('.pokemon'),
-      erroMessage = getElement('.error');
+      container = getElement('.pokemon');
 
+//card      
 var pokeName, 
     pokemon, 
     card;
+
+//atributos
+var hp, 
+    attack, 
+    defense,
+    specialattack,
+    specialdefense,
+    speed,
+    botaoTipo;
+
+//autocomplete    
+var pokeList = [""];
 
 async function requestPokeInfo(url, name) {
   await fetch(url + name)
     .then(response => response.json())
     .then(data => {
       
+      //atribui variabel polemon para ser trabalhada
       pokemon = data;
       
-      $(".container").addClass("aparece");
+      //mostra div container
+      $(".pokemon").addClass("aparece");
       
-      // ajuste 0 a esquerda
+      // ajuste 0 a esquerda pokemons id abaixo de 100
       var tamanho = "";
       tamanho = pokemon.id.toString();
       
@@ -38,16 +49,8 @@ async function requestPokeInfo(url, name) {
     .catch(err => console.log(err));
 }
 
-
-function createCard () {
-  
-  var hp, 
-      attack, 
-      defense,
-      specialattack,
-      specialdefense,
-      speed;
-
+function attributePokemon(){
+   
   pokemon.stats.forEach(e => {
     if(e.stat.name === 'hp'){
       hp = e.base_stat;
@@ -73,10 +76,11 @@ function createCard () {
       speed = e.base_stat;
     }
   });
+}
 
+function tiposPokemon(){
   var tipos = [];
   var url = [];
-  var botaoTipo ;
 
 if(pokemon.types.length >= 1){
  
@@ -145,7 +149,6 @@ if(pokemon.types.length >= 1){
       estilo1 = corEstilo[17].toString();
     }
 
-
   if(pokemon.types.length === 1){
    
     botaoTipo = ` <button class="btn btn-success `+ estilo1 +`" disabled>  ` + tipos[0] + `</button>`;
@@ -190,28 +193,36 @@ if(pokemon.types.length >= 1){
       estilo2 = corEstilo[17].toString();
     }
 
-    botaoTipo = ` <button class="btn btn-success `+ estilo1 +`" disabled >  ` + tipos[0] + ` </button> 
-                  <button class="btn btn-success `+ estilo2 +`" disabled >  ` + tipos[1] + ` </button>`;
-  } 
+      botaoTipo = ` <button class="btn btn-success `+ estilo1 +`" disabled >  ` + tipos[0] + ` </button> 
+                    <button class="btn btn-success `+ estilo2 +`" disabled >  ` + tipos[1] + ` </button>`;
+ 
+    } 
+}
 }
 
+function createCard () {
+  
+  attributePokemon();
+
+  tiposPokemon();
+  //Template String ${variavel}
   card = `
              <div class="card" style="width: 100%;border-radius: 25px !important;background-color:#e8e1e1">
-                <div class="row container cardHeaderFooter" >
-                    <div class="col-12" >
+                <div class="row container cardHeaderFooter col-md-12 col-12" >
+                    <div class="col-12 col-md-12" >
                         <h3 class="name">${pokemon.name.toUpperCase()}</h3>
                     </div>
-                    <div class="col-8" style="padding: 15px" >
+                    <div class="col-8 col-md-8" style="padding: 15px" >
                       ` + botaoTipo + `  
                     </div>
-                    <div class="col-2" style="padding-top: 10px ;padding-right: 35px;">
+                    <div class="col-2 col-md-2" style="padding-top: 10px ;padding-right: 35px;">
                         <img class="rounded-cir cle" src="resources/images/pokebola.png" height="40px" width="40px"> </img>
                     </div>
 
                 </div>
 
                 <div class="container">
-                    <div class="col-12" style="text-align:center" >
+                    <div class="col-12 col-md-12" style="text-align:center" >
                         <img class="rounded-cir cle" src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${pokemon.id}.png" height="100%" width="100%"> </img>
                     </div>
                 </div>    
@@ -219,16 +230,16 @@ if(pokemon.types.length >= 1){
                 <div class="card-body">
                     <p class="card-text">
                         <div class="row container">
-                            <div class="col-4">
+                            <div class="col-4 col-md-4">
                               <h7>${pokemon.weight  / 10}kg</h7> 
                               <h7>Altura ${pokemon.height  / 10}m</h7>
                             </div>
-                            <div class="col-4" style="border-left-style: inset;border-left-width: thin;">
+                            <div class="col-4 col-md-4" style="border-left-style: inset;border-left-width: thin;">
                             <h7>HP:  ${hp} </h7>
                             <h7>ATK: ${attack} </h7>
                             <h7>DEF: ${defense} </h7>
                             </div>  
-                            <div class="col-4" style="border-left-style: inset;border-left-width: thin;">
+                            <div class="col-4 col-md-4" style="border-left-style: inset;border-left-width: thin;">
                             <h7>SPD: ${speed} </h7> 
                             <h7>SAT: ${specialattack} </h7>  
                             <h7>SDF: ${specialdefense}  </h7>
@@ -237,12 +248,11 @@ if(pokemon.types.length >= 1){
                     </p>
                 </div>
             </div>
-
         </div>`;
   return card;
 }
 
-async function startApp(pokeName) {
+async function initApp(pokeName) {
   await requestPokeInfo(baseUrl, pokeName);
       container.innerHTML = createCard();
 }
@@ -251,7 +261,7 @@ searchButton.addEventListener('click', event => {
   event.preventDefault();
   pokeName = searchInput.value.toLowerCase();
   searchInput.value = '';
-  startApp(pokeName);
+  initApp(pokeName);
 });
 
 function autocomplete(inp, arr) {
@@ -272,6 +282,7 @@ function autocomplete(inp, arr) {
         for (i = 0; i < arr.length; i++) {
           if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
             b = document.createElement("DIV");
+            b.setAttribute('class','autocomplete-space');
             b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
             b.innerHTML += arr[i].substr(val.length);
             b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
@@ -325,16 +336,16 @@ function autocomplete(inp, arr) {
     document.addEventListener("click", function (e) {
         closeAllLists(e.target);
     });
-  }
+}
 
-var pokeList = [""];
-async function requisicao(url) {
+async function requisicaoAutoComplete(url) {
   await fetch(url)
     .then(response => response.json())
     .then(data => {
       
       data.results.forEach(e => {
-        //pokemons /10000
+        
+        //pokemons /10000 sem foto outra geracao
         if(e.url.length != 40){
           pokeList.push(e.name.toString());
         }
@@ -342,8 +353,8 @@ async function requisicao(url) {
     })
     .catch(err => console.log(err));
 }
- requisicao('https://pokeapi.co/api/v2/pokemon/?limit=2000');
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+//preenche autocomplete
+requisicaoAutoComplete('https://pokeapi.co/api/v2/pokemon/?limit=2000');
 autocomplete(document.getElementById("myInput"), pokeList);
 
